@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
 
-class FavoriteItems extends StatefulWidget {
+class StateContainer extends StatefulWidget {
   final Widget child;
-  const FavoriteItems({super.key, required this.child});
-  static FavoriteItemsState of(BuildContext context) {
+  const StateContainer({super.key, required this.child});
+  static StateContainerState of(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<_InheritedFavoriteItems>()!
+        .dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!
         .favoriteItemsState;
   }
 
   @override
-  State<FavoriteItems> createState() => FavoriteItemsState();
+  State<StateContainer> createState() => StateContainerState();
 }
 
-class FavoriteItemsState extends State<FavoriteItems> {
+class StateContainerState extends State<StateContainer> {
   List<int> favoriteItems = [];
   addToFavorite(int item) {
     setState(() {
-      favoriteItems.add(item);
+      addItem(item);
     });
+  }
+
+  addItem(int item) {
+    favoriteItems.add(item);
   }
 
   removeFromFavorite(int item) {
     setState(() {
-      favoriteItems.remove(item);
+      removeItem(item);
     });
+  }
+
+  removeItem(int item) {
+    favoriteItems.remove(item);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedFavoriteItems(
+    return _InheritedStateContainer(
       favoriteItems: favoriteItems,
       favoriteItemsState: this,
       child: widget.child,
@@ -37,16 +45,16 @@ class FavoriteItemsState extends State<FavoriteItems> {
   }
 }
 
-class _InheritedFavoriteItems extends InheritedWidget {
+class _InheritedStateContainer extends InheritedWidget {
   final List<int> favoriteItems;
-  final FavoriteItemsState favoriteItemsState;
-  const _InheritedFavoriteItems({
+  final StateContainerState favoriteItemsState;
+  const _InheritedStateContainer({
     required super.child,
     required this.favoriteItems,
     required this.favoriteItemsState,
   });
   @override
-  bool updateShouldNotify(covariant _InheritedFavoriteItems oldWidget) {
+  bool updateShouldNotify(covariant _InheritedStateContainer oldWidget) {
     return true;
   }
 }
