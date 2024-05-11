@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:item_list/inherited_widget.dart';
+import 'package:item_list/state_container.dart';
 
 class ItemTile extends StatelessWidget {
   final int itemNo;
@@ -8,7 +8,7 @@ class ItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var favoriteItemsState = FavoriteItems.of(context);
+    var favoriteItemsState = StateContainer.of(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

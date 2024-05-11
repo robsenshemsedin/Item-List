@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:item_list/inherited_widget.dart';
+import 'package:item_list/state_container.dart';
 import 'package:item_list/widgets/widgets.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class FavoritesPage extends StatelessWidget {
           title: const Text('Favorites'),
         ),
         body: Builder(builder: (context) {
-          final favoriteItems = FavoriteItems.of(context).favoriteItems;
+          final favoriteItems = StateContainer.of(context).favoriteItems;
           return ListView.builder(
             itemCount: favoriteItems.length,
             padding: const EdgeInsets.symmetric(vertical: 16),

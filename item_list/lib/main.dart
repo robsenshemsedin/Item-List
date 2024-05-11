@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:item_list/inherited_widget.dart';
+import 'package:item_list/state_container.dart';
 import 'package:item_list/screen/screens.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FavoriteItems(
+    return StateContainer(
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

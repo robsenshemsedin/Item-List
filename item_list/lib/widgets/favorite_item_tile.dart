@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:item_list/inherited_widget.dart';
+import 'package:item_list/state_container.dart';
 
 class FavoriteItemTile extends StatelessWidget {
   const FavoriteItemTile(this.itemNo, {super.key});
@@ -22,7 +22,7 @@ class FavoriteItemTile extends StatelessWidget {
           key: Key('remove_icon_$itemNo'),
           icon: const Icon(Icons.close),
           onPressed: () {
-            FavoriteItems.of(context).removeFromFavorite(itemNo);
+            StateContainer.of(context).removeFromFavorite(itemNo);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Removed from favorites.'),
