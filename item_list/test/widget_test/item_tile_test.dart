@@ -15,32 +15,26 @@ void main() {
       expect(findByType, findsAtLeast(1));
       final titleFinder = find.textContaining(itemNumber.toString());
       expect(titleFinder, findsOneWidget);
-
       final findByKey = find.byKey(favoriteButtonKey);
       expect(findByKey, findsOneWidget);
       final findByIcon = find.byIcon(Icons.favorite_border);
       expect(findByIcon, findsOneWidget);
-      final StateContainerState stateContainerState =
-          tester.state(find.byType(StateContainer));
-      await tester.tap(findByKey);
-      await tester.pump();
-      expect(stateContainerState.favoriteItems.contains(itemNumber), true);
-      await tester.tap(findByKey);
-      await tester.pump();
-      expect(stateContainerState.favoriteItems.contains(itemNumber), false);
     });
-    testWidgets('should update favorites list on user interaction',
+    testWidgets(
+        'should update favorites list and show snack bar on user interaction',
         (tester) async {
       await tester.pumpWidget(itemTile);
       final findByKey = find.byKey(favoriteButtonKey);
       final StateContainerState stateContainerState =
           tester.state(find.byType(StateContainer));
       await tester.tap(findByKey);
-      await tester.pump();
+      await tester.pumpAndSettle();
+      expect(find.text('Added to favorites.'), findsOneWidget);
       expect(stateContainerState.favoriteItems.contains(itemNumber), true);
       await tester.tap(findByKey);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(stateContainerState.favoriteItems.contains(itemNumber), false);
+      expect(find.text('Removed from favorites.'), findsOneWidget);
     });
   });
 }
