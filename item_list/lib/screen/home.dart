@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Item List'),
-        actions: <Widget>[
+        actions: <TextButton>[
           TextButton.icon(
             onPressed: () {
               Navigator.push(
