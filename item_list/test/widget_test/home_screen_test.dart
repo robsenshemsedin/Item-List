@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:item_list/main.dart';
+import 'package:item_list/screen/screens.dart';
+import 'package:item_list/state_container.dart';
 
 void main() {
   group('Home Screen Widget Test', () {
-    const myApp = MyApp();
+    const stateContainer = MaterialApp(
+      home: StateContainer(child: HomePage()),
+    );
     testWidgets('should show UI elements', (tester) async {
-      await tester.pumpWidget(myApp);
+      await tester.pumpWidget(stateContainer);
       expect(find.byType(AppBar), findsExactly(1));
       const appName = 'Item List';
       expect(find.text(appName), findsOne);
@@ -16,7 +19,7 @@ void main() {
       // expect(find.byType(TextButton), findsOneWidget);
     });
     testWidgets('should scroll through items', (tester) async {
-      await tester.pumpWidget(myApp);
+      await tester.pumpWidget(stateContainer);
       const itemNumber = 50;
       await tester.scrollUntilVisible(
           find.byKey(const Key('text_$itemNumber')), 500);
